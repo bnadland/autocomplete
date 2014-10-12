@@ -7,9 +7,9 @@
 
 # Usage
 
-$ virtualenv -p python3 env
-$ ./env/bin/pip install -r requirements.txt
-$ ./autocomplete.py
+    $ virtualenv -p python3 env
+    $ ./env/bin/pip install -r requirements.txt
+    $ ./autocomplete.py
 
 Open browser on http://localhost:5000/ and type away.
 
