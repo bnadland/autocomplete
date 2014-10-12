@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="autocompleter">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>autocompleter</title>
+    <script src="/frontend/lib/angular.min.js"></script>
+    <script>
+        angular.module("autocompleter", []);
+        angular.module("autocompleter").controller("MainController", function($http, $scope) {
+            $scope.mention = '';
+            $scope.suggestions = [];
+            $scope.$watch("mention", function(val) {
+                $http.get("/autocomplete/users", {"params": {"term": val} })
+                    .success(function(data) {
+                        $scope.suggestions = data.data;
+                    });
+            });
+        });
+    </script>
+</head>
+
+<body ng-controller="MainController">
+    @<input type="search" ng-model="mention" ng-model-options="{debounce: 200}">
+    <div ng-repeat="suggestion in suggestions">
+        {{ suggestion }}
+    </div>
+</body>
+</html>
